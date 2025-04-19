@@ -1,9 +1,8 @@
 from functools import cached_property
 from typing import TypedDict
 
-from lib.request_processors import BaseRequestProcessor
-
 from api.serializers import PhoneCheckSerializer
+from lib.request_processors import BaseRequestProcessor
 
 
 class RecognizePhoneStatusDict(TypedDict):
