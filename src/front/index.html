@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Проверка номера</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            padding-top: 100px;
+        }
+
+        .form-container {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: #4CAF50;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .result {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h3>Проверка номера</h3>
+    <form id="phoneForm">
+        <label for="phone">Номер телефона:</label>
+        <input type="text" id="phone" name="phone" placeholder="79124999999" required />
+        <button type="submit">Проверить</button>
+    </form>
+    <div id="response" class="result"></div>
+</div>
+
+<script>
+    document.getElementById('phoneForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const phone = document.getElementById('phone').value;
+        const responseDiv = document.getElementById('response');
+        responseDiv.innerHTML = 'Загрузка...';
+
+        try {
+            const res = await fetch('http://localhost:8000/recognition/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ phone: phone })
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                responseDiv.innerHTML = `
+                    <b>Номер найден:</b> ${data.exists ? 'Да' : 'Нет'}<br>
+                    <b>Оператор:</b> ${data.operator}<br>
+                    <b>Регион:</b> ${data.region}
+                `;
+            } else {
+                // Предположим, что ошибка валидации
+                if (data.phone) {
+                    responseDiv.innerHTML = `<span class="error">${data.phone.join('<br>')}</span>`;
+                } else {
+                    responseDiv.innerHTML = '<span class="error">Неизвестная ошибка</span>';
+                }
+            }
+        } catch (err) {
+            responseDiv.innerHTML = `<span class="error">Ошибка запроса: ${err.message}</span>`;
+        }
+    });
+</script>
+</body>
+</html>
