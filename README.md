@@ -30,4 +30,4 @@ cd src/front
 python3 -m http.server 8845
 ```
 
-Open browser on `localhost:8000` and you'll see form)
+Open browser on `localhost:8845` and you'll see form)
