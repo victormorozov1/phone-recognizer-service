@@ -53,7 +53,7 @@
     <h3>Проверка номера</h3>
     <form id="phoneForm">
         <label for="phone">Номер телефона:</label>
-        <input type="text" id="phone" name="phone" placeholder="79124999999" required />
+        <input type="text" id="phone" name="phone" placeholder="79124999999" required/>
         <button type="submit">Проверить</button>
     </form>
     <div id="response" class="result"></div>
@@ -84,7 +84,6 @@
                     <b>Регион:</b> ${data.region}
                 `;
             } else {
-                // Предположим, что ошибка валидации
                 if (data.phone) {
                     responseDiv.innerHTML = `<span class="error">${data.phone.join('<br>')}</span>`;
                 } else {

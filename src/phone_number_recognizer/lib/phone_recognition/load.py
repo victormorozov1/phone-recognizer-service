@@ -1,11 +1,11 @@
 import csv
 from typing import Iterable
 
-from lib.phone_recognition.intervals_compressed_info import IntervalCompressedInfo
+from lib.phone_recognition.interval_map import IntervalMap
 from lib.phone_recognition.typings import PhoneNumbersInterval
 
 
-def load_from_files(files: Iterable[str]) -> IntervalCompressedInfo:
+def load_from_files(files: Iterable[str]) -> IntervalMap:
     intervals: list[PhoneNumbersInterval] = []
     for filename in files:
         with open(filename) as csvfile:
@@ -24,16 +24,4 @@ def load_from_files(files: Iterable[str]) -> IntervalCompressedInfo:
                 )
                 intervals.append(interval)
 
-    return IntervalCompressedInfo(intervals)
-
-
-if __name__ == '__main__':
-    op, re = load_from_files(
-        [
-            '/Users/viktor/Documents/ABC-3xx.csv',
-            '/Users/viktor/Documents/ABC-4xx.csv',
-            '/Users/viktor/Documents/ABC-8xx.csv',
-            '/Users/viktor/Documents/DEF-9xx.csv',
-        ],
-    )
-    print(len(re))
+    return IntervalMap(intervals)

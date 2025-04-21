@@ -1,5 +1,5 @@
 from functools import cached_property
-from typing import TypedDict, NotRequired
+from typing import TypedDict
 
 from api.phones_data_loader import PhonesDataLoader
 from api.serializers import PhoneCheckSerializer

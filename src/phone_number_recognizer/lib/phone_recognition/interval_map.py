@@ -1,7 +1,7 @@
 from lib.phone_recognition.typings import PhoneNumbersInterval
 
 
-class IntervalCompressedInfo:
+class IntervalMap:
     def __init__(self, data: list[PhoneNumbersInterval]):
         self.data = self._compress_data(data)
 

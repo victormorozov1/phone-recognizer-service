@@ -1,6 +1,6 @@
 import pytest
 
-from lib.phone_recognition.data_load import load_from_files
+from lib.phone_recognition.load import load_from_files
 from lib.phone_recognition.recognition import get_phone_info
 
 NUMBERS_DATA = load_from_files(
