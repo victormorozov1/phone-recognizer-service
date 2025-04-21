@@ -31,3 +31,8 @@ python3 -m http.server 8845
 ```
 
 Open browser on `localhost:8845` and you'll see form)
+
+## Video
+
+https://github.com/user-attachments/assets/548e1370-9c12-4a3c-b5f6-ed6647bf83bc
+
